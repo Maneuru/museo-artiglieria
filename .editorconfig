@@ -1,0 +1,171 @@
+root = true
+
+[*.cs]
+#############################
+# Indentation and Formatting
+#############################
+indent_style = space
+indent_size = 4
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+
+##########################
+# Naming convention (C#)
+##########################
+
+##################
+# Private fields
+##################
+# types
+dotnet_naming_symbols.types.applicable_kinds = class, struct, enum, namespace, type_parameter
+dotnet_naming_symbols.types.applicable_accessibilities = *
+
+# interfaces
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = *
+
+# functions
+dotnet_naming_symbols.functions.applicable_kinds = method, delegate, local_function
+dotnet_naming_symbols.functions.applicable_accessibilities = *
+
+# fields
+dotnet_naming_symbols.fields.applicable_kinds = field, property, parameter, local
+dotnet_naming_symbols.fields.applicable_accessibilities = *
+
+# private_fields
+dotnet_naming_symbols.private_fields.applicable_kinds = field, property
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+# events
+dotnet_naming_symbols.events.applicable_kinds = event
+dotnet_naming_symbols.events.applicable_accessibilities = *
+
+#########
+# Styles
+#########
+# camel_case
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+# underscore_camel
+dotnet_naming_style.underscore_camel.capitalization = camel_case
+dotnet_naming_style.underscore_camel.required_prefix = _
+
+# pascal_case
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# interface_style
+dotnet_naming_style.interface_style.capitalization = pascal_case
+dotnet_naming_style.interface_style.required_prefix = I
+
+# event_style
+dotnet_naming_style.event_style.capitalization = camel_case
+dotnet_naming_style.event_style.required_suffix = Event
+
+########
+# Rules
+########
+# types_should_be_pascal_case
+dotnet_naming_rule.class_like_should_be_pascal_case.symbols = types
+dotnet_naming_rule.class_like_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.class_like_should_be_pascal_case.severity = warning
+
+# interfaces_should_begin_whit_I
+dotnet_naming_rule.interfaces_should_begin_whit_I.symbols = interfaces
+dotnet_naming_rule.interfaces_should_begin_whit_I.style = interface_style
+dotnet_naming_rule.interfaces_should_begin_whit_I.severity = warning
+
+# functions_should_be_pascal_case
+dotnet_naming_rule.functions_should_be_pascal_case.symbols = functions
+dotnet_naming_rule.functions_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.functions_should_be_pascal_case.severity = warning
+
+# fields_should_be_camel_case
+dotnet_naming_rule.fields_should_be_camel_case.symbols = fields
+dotnet_naming_rule.fields_should_be_camel_case.style = camel_case
+dotnet_naming_rule.fields_should_be_camel_case.severity = warning
+
+# private_fields_should_use_underscore
+dotnet_naming_rule.private_fields_should_use_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_should_use_underscore.style = underscore_camel
+dotnet_naming_rule.private_fields_should_use_underscore.severity = warning
+
+# events_shoul_end_with_event
+dotnet_naming_rule.events_shoul_end_with_event.symbols = events
+dotnet_naming_rule.events_shoul_end_with_event.style = event_style
+dotnet_naming_rule.events_shoul_end_with_event.severity = warning
+
+
+
+##############################
+# Regole Roslyn (IDE + CA)
+##############################
+
+# IDE0005: rimuovi using inutilizzati
+dotnet_diagnostic.IDE0005.severity = warning
+
+# IDE0011: usa sempre le graffe nei blocchi (anche per una sola riga)
+dotnet_diagnostic.IDE0011.severity = warning
+
+# IDE0044: rendi i campi readonly se possibile
+dotnet_diagnostic.IDE0044.severity = suggestion
+
+# IDE0051: rimuovi membri privati non usati
+dotnet_diagnostic.IDE0051.severity = warning
+
+# IDE0059: rimuovi assegnazioni inutili
+dotnet_diagnostic.IDE0059.severity = warning
+
+# IDE0060: rimuovi parametri inutilizzati
+dotnet_diagnostic.IDE0060.severity = warning
+
+# CA1062: valida i parametri per null
+dotnet_diagnostic.CA1062.severity = warning
+
+# CA1822: rendi i metodi statici se non usano membri di istanza
+dotnet_diagnostic.CA1822.severity = suggestion
+
+# CA1508: evita condizioni sempre vere o false
+dotnet_diagnostic.CA1508.severity = warning
+
+# CA1031: evita catch generici
+dotnet_diagnostic.CA1031.severity = warning
+
+# CA1303: evita passaggio diretto di stringhe localizzabili
+dotnet_diagnostic.CA1303.severity = suggestion
+
+# CA2000: evita perdite di risorse (Dispose mancante)
+dotnet_diagnostic.CA2000.severity = warning
+
+# CA2200: evita catch + throw ex (perde lo stack trace)
+dotnet_diagnostic.CA2200.severity = warning
+
+##################################
+# Unity-specific (soft warnings)
+##################################
+
+# CS0660: UnityEngine.Object ha overload ==/!=, quindi sopprimiamo il warning
+dotnet_diagnostic.CS0660.severity = silent
+
+# IDE0079: rimuovi direttive #pragma inutili
+dotnet_diagnostic.IDE0079.severity = suggestion
+
+# IDE0090: usa new(...) per istanziazione semplice
+dotnet_diagnostic.IDE0090.severity = warining
+
+# IDE0130: mantieni namespace coerente con struttura cartelle
+dotnet_diagnostic.IDE0130.severity = warning
+
+##################################
+# Suggerimenti per leggibilità
+##################################
+
+# IDE0045: evita condizioni implicite (es. preferisci if (x != null) a if (x))
+dotnet_diagnostic.IDE0045.severity = warning
+
+# IDE0019: usa pattern matching invece di "as" + null check
+dotnet_diagnostic.IDE0019.severity = suggestion
+
+# IDE0039: usa accesso semplificato a proprietà
+dotnet_diagnostic.IDE0039.severity = suggestion
