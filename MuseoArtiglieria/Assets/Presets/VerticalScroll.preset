@@ -42,7 +42,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Elasticity
-    value: 0.1
+    value: 0.075
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Inertia

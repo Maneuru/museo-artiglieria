@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 #pragma warning disable IDE0130
@@ -8,7 +9,10 @@ namespace UI.PageNavigation
         private RectTransform _originalParent;
         public RectTransform rectTransform => transform as RectTransform;
 
-        private void Awake() => _originalParent = transform.parent as RectTransform;
+        private void Awake()
+        {
+            _originalParent = transform.parent as RectTransform;
+        }
 
         public void UpdateParent(RectTransform newParent)
         {
@@ -25,17 +29,18 @@ namespace UI.PageNavigation
 
         public void BackToOriginalParent()
         {
-            if (_originalParent)
+            if (!_originalParent)
             {
-                var height = rectTransform.rect.height;
-                transform.SetParent(rectTransform);
-
-                // rectTransform.anchorMin = new(0, 1);
-                // rectTransform.anchorMax = new(1, 1);
-                // rectTransform.anchoredPosition = new Vector2(0, 0);
-                // rectTransform.sizeDelta = new(0, height);
-                // rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+                throw new NullReferenceException($"{nameof(Page)} has no original parent to return to.");
             }
+
+            var height = rectTransform.rect.height;
+            transform.SetParent(_originalParent);
+
+            rectTransform.anchorMin = new(0, 1);
+            rectTransform.anchorMax = new(1, 1);
+            rectTransform.anchoredPosition = new Vector2(0, 0);
+            rectTransform.sizeDelta = new(0, height);
         }
 
         public void Activate()
