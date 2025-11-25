@@ -75,6 +75,11 @@ public class Reservation : UI.PageNavigation.Page
         if (!openingDay.IsOpenAt(time))
         {
             time = openingDay.firstAvailableTime;
+            if (!openingDay.IsOpenAt(time))
+            {
+                _timeErrorText.gameObject.SetActive(true);
+                return;
+            }
         }
 
         _selectedTime = time;

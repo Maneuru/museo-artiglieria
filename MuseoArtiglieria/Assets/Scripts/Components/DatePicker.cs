@@ -25,6 +25,34 @@ public class DatePicker : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
+[UnityEditor.CustomEditor(typeof(DatePicker))]
+public class DatePickerEditor : UnityEditor.Editor
+{
+    private string _date;
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        _date = UnityEditor.EditorGUILayout.TextField("Test Date (yyyy-MM-dd)", _date);
+
+        if (GUILayout.Button("Test Date Picker"))
+        {
+            if (!DateTime.TryParseExact(_date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+            {
+                return;
+            }
+
+            var fieldInfo = target.GetType().GetField("_onDateSelected", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (fieldInfo.GetValue(target) is UnityEvent<DateTime> dateEvent)
+            {
+                dateEvent.Invoke(parsedDate);
+            }
+        }
+    }
+}
+#endif
+
 #if UNITY_ANDROID
 public class AndroidDatePicker
 {

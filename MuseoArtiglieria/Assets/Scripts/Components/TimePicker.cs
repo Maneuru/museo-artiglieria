@@ -24,6 +24,34 @@ public class TimePicker : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
+[UnityEditor.CustomEditor(typeof(TimePicker))]
+public class TimePickerEditor : UnityEditor.Editor
+{
+    private string _time;
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        _time = UnityEditor.EditorGUILayout.TextField("Test Time (HH:mm)", _time);
+
+        if (GUILayout.Button("Test Time Picker"))
+        {
+            if (!DateTime.TryParseExact(_time, "HH:mm", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+            {
+                return;
+            }
+
+            var fieldInfo = target.GetType().GetField("_onTimeSelected", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (fieldInfo.GetValue(target) is UnityEvent<TimeSpan> timeEvent)
+            {
+                timeEvent.Invoke(parsedDate.TimeOfDay);
+            }
+        }
+    }
+}
+#endif
+
 #if UNITY_ANDROID
 public class AndroidTimePicker
 {

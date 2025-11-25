@@ -11,8 +11,8 @@ public class ConfirmationPage : Page
     public void OnReservationConfirmed(DateTime reservationDateTime, TimeSpan visitDuration, string eventTitle = "Visit to Museo dell'Artiglieria")
     {
         eventTitle = Uri.EscapeDataString(eventTitle);
-        string start = reservationDateTime.ToString("yyyyMMdd'T'HHmmss'Z'");
-        string end = reservationDateTime.Add(visitDuration).ToString("yyyyMMdd'T'HHmmss'Z'");
+        string start = reservationDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmmss'Z'");
+        string end = reservationDateTime.Add(visitDuration).ToUniversalTime().ToString("yyyyMMdd'T'HHmmss'Z'");
         string location = Uri.EscapeDataString(_museumLocation);
 
         _googleCalendarUrl = $"{_googleCalendarBaseUrl}&text={eventTitle}&dates={start}/{end}&location={location}";
