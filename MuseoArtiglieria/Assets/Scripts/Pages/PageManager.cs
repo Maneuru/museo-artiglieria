@@ -54,6 +54,15 @@ namespace UI.PageNavigation
                 throw new MissingReferenceException("PageManager requires a reference to an overlay container RectTransform.");
             }
 
+            foreach (var childPage in _scrollRect.viewport.GetComponentsInChildren<Page>(true))
+            {
+                childPage.originalParent = _scrollRect.viewport;
+                if (childPage != currentPage)
+                {
+                    childPage.Deactivate();
+                }
+            }
+
             currentPage = page;
         }
 

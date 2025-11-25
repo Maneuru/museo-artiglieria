@@ -6,17 +6,12 @@ namespace UI.PageNavigation
 {
     public class Page : MonoBehaviour
     {
-        private RectTransform _originalParent;
+        [HideInInspector] public RectTransform originalParent;
         public RectTransform rectTransform => transform as RectTransform;
-
-        private void Awake()
-        {
-            _originalParent = transform.parent as RectTransform;
-        }
 
         public void UpdateParent(RectTransform newParent)
         {
-            _originalParent ??= transform.parent as RectTransform;
+            originalParent ??= transform.parent as RectTransform;
 
             var height = rectTransform.rect.height;
             transform.SetParent(newParent);
@@ -29,13 +24,13 @@ namespace UI.PageNavigation
 
         public void BackToOriginalParent()
         {
-            if (!_originalParent)
+            if (!originalParent)
             {
                 throw new NullReferenceException($"{nameof(Page)} has no original parent to return to.");
             }
 
             var height = rectTransform.rect.height;
-            transform.SetParent(_originalParent);
+            transform.SetParent(originalParent);
 
             rectTransform.anchorMin = new(0, 1);
             rectTransform.anchorMax = new(1, 1);
@@ -59,7 +54,7 @@ namespace UI.PageNavigation
 
         private void Reset()
         {
-            transform.SetParent(_originalParent);
+            transform.SetParent(originalParent);
             // TODO
         }
     }
