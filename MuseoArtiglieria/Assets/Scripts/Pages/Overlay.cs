@@ -102,6 +102,7 @@ namespace UI.PageNavigation
             else
             {
                 currentPage.Deactivate();
+                currentPage.BackToOriginalParent();
                 currentPage = null;
             }
 

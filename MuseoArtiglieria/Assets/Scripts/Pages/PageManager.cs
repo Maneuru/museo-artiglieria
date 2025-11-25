@@ -73,7 +73,7 @@ namespace UI.PageNavigation
             }
         }
 
-        private void ReplacePage(Page newPage)
+        public void ReplacePage(Page newPage)
         {
             if (newPage != currentPage)
             {

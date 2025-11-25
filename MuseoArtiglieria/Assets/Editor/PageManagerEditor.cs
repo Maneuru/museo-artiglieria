@@ -45,11 +45,17 @@ namespace UI.PageNavigation
 
             if (GUILayout.Button("Open Page"))
             {
+                Debug.Log($"Searching page with name {_pageName}");
                 var pages = pageManager.GetComponentsInChildren<Page>(true).ToList();
                 var pageToOpen = pages.FirstOrDefault(p => p.gameObject.name == _pageName);
                 if (pageToOpen != default(Page))
                 {
+                    Debug.Log($"Opening page {pageToOpen.gameObject.name} with mode {_openMode}");
                     pageManager.OpenPage(pageToOpen, _openMode);
+                }
+                else
+                {
+                    Debug.LogWarning($"No page found with name {_pageName}");
                 }
             }
         }

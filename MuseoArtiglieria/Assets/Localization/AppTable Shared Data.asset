@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: AppTable Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: AppTable
+  m_TableCollectionNameGuidString: 830eb8f749a549d4caebe710cc60ebcc
+  m_Entries:
+  - m_Id: 60428386304
+    m_Key: reservation_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971621213929472
+    m_Key: date
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971759227502592
+    m_Key: time
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5591106181633146880
+  references:
+    version: 2
+    RefIds:
+    - rid: 5591106181633146880
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1763753071838
