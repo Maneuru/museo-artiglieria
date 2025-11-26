@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 #pragma warning disable IDE0130
 namespace UI.PageNavigation
-
 {
-
     public class PageManager : MonoBehaviour
     {
         [Header("References")]
