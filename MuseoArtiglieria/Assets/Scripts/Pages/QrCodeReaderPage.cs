@@ -9,7 +9,7 @@ public class QrCodeReaderPage : Page
     [SerializeField] private TMP_Text _errorText;
 
     [SerializeField] private PageManager _pageManager;
-    [SerializeField] private Visualizer _visualizer;
+    [SerializeField] private VisualizerPage _visualizer;
     [SerializeField] private Button _goButton;
 
     private int _assetID;
