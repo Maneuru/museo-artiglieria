@@ -45,10 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad06b50b1d82f34c9265663e9800a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Visualizable
-  _assetID: 0
-  _assetName: 
-  _description: 
-  _previewImage: {fileID: 0}
+  _assetID: 2584
+  _assetName: Organo manesco a 13 canne
+  _description: Arma multicanne del periodo rinascimentale, composta da tredici canne
+    affiancate e azionate manualmente. Progettata per aumentare il volume di fuoco
+    rispetto ai fucili singoli, consentiva di esplodere una rapida sequenza di colpi,
+    rappresentando uno dei primi tentativi di creare armi a tiro ripetuto.
+  _previewImage: {fileID: 21300000, guid: ad4c3a61ae343c7499d1af1a6e5e115b, type: 3}
 --- !u!1001 &6251162815801770247
 PrefabInstance:
   m_ObjectHideFlags: 0

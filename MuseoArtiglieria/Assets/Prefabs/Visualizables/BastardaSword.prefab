@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad06b50b1d82f34c9265663e9800a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Visualizable
-  _assetID: 0
-  _assetName: 
-  _description: 
-  _previewImage: {fileID: 0}
+  _assetID: 2589
+  _assetName: Spada
+  _description: SPada di luceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+  _previewImage: {fileID: 21300000, guid: bc6a09b5b4ce4b84a851cca4c21fd741, type: 3}
 --- !u!1001 &7780008034894911423
 PrefabInstance:
   m_ObjectHideFlags: 0

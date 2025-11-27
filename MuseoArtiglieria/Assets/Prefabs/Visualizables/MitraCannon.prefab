@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad06b50b1d82f34c9265663e9800a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Visualizable
-  _assetID: 0
-  _assetName: 
-  _description: 
-  _previewImage: {fileID: 0}
+  _assetID: 2586
+  _assetName: 'Mitragliatrice a 10 canne rotanti gatling '
+  _description: "La mitragliatrice Gatling a 10 canne rotanti \xE8 un\u2019arma del
+    XIX secolo azionata a manovella, in cui le canne ruotano attorno a un asse centrale.
+    Questo sistema consente un fuoco rapido e continuo, riducendo il surriscaldamento
+    e aumentando l\u2019affidabilit\xE0. \xC8 considerata una delle prime vere mitragliatrici
+    della storia e un passaggio fondamentale nell\u2019evoluzione delle armi automatiche."
+  _previewImage: {fileID: 21300000, guid: e26d7236367ce0042a8b8bc9523dee8a, type: 3}
 --- !u!1001 &392354641520513244
 PrefabInstance:
   m_ObjectHideFlags: 0

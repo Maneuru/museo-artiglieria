@@ -45,10 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad06b50b1d82f34c9265663e9800a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Visualizable
-  _assetID: 0
-  _assetName: 
-  _description: 
-  _previewImage: {fileID: 0}
+  _assetID: 2585
+  _assetName: Primogenie di artiglieria su affisso
+  _description: "Esempio primitivo di artiglieria montata su supporto fisso in legno.
+    Questo tipo di pezzo, semplice ma innovativo per l\u2019epoca, rappresenta una
+    delle prime soluzioni per stabilizzare la canna durante il tiro, segnando l\u2019inizio
+    dello sviluppo delle armi da fuoco pesanti."
+  _previewImage: {fileID: 21300000, guid: eb0a08e48b1b66c40aba08ef61a6f1cf, type: 3}
 --- !u!1001 &3751258219973060466
 PrefabInstance:
   m_ObjectHideFlags: 0

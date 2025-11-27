@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad06b50b1d82f34c9265663e9800a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Visualizable
-  _assetID: 0
-  _assetName: 
-  _description: 
-  _previewImage: {fileID: 0}
+  _assetID: 2587
+  _assetName: Mazza d'arme
+  _description: Arma da impatto in metallo, dotata di piastre laterali pensate per
+    colpire e deformare le armature. Robusta ed essenziale, era usata a distanza
+    ravvicinata contro avversari pesantemente protetti.
+  _previewImage: {fileID: 21300000, guid: d29044cda3c539b4eb8896dc038cad0e, type: 3}
 --- !u!1001 &6819790884185061637
 PrefabInstance:
   m_ObjectHideFlags: 0
