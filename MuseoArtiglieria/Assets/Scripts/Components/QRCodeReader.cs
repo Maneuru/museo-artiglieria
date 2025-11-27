@@ -16,11 +16,12 @@ public class QRCodeReader : MonoBehaviour
     [SerializeField] private Vector2Int _textureResolution = new(512, 512);
 
     [Header("Performance")]
-    [Min(0f), SerializeField] private float _waitForSeconds = 1f;
+    [Min(0f), SerializeField] private float _waitForSeconds = .3f;
     [SerializeField] private UnityEvent<string> _onQRCodeDetected;
 
     private RawImage _rawImage;
     private Coroutine _readingCoroutine;
+    private string _qrCodeResult;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -30,19 +31,23 @@ public class QRCodeReader : MonoBehaviour
     }
 #endif
 
-    private WebCamTexture _webCamTexture;
-    private string _qrCodeResult;
-
-    private void Start()
+    private void Awake()
     {
-        _webCamTexture = new WebCamTexture(_textureResolution.x, _textureResolution.y);
         _rawImage = GetComponent<RawImage>();
-        _rawImage.texture = _webCamTexture;
+        var tmp = new WebCamTexture(_textureResolution.x, _textureResolution.y);
+        DestroyImmediate(tmp);
+    }
 
-        _webCamTexture.Play();
-        _webCamTexture.Stop();
-
+    private void OnEnable()
+    {
+        _rawImage.texture = new WebCamTexture(_textureResolution.x, _textureResolution.y);
         StartReading();
+    }
+
+    private void OnDisable()
+    {
+        DestroyImmediate(_rawImage.texture);
+        _rawImage.texture = null;
     }
 
     public void StartReading()
@@ -57,14 +62,17 @@ public class QRCodeReader : MonoBehaviour
 
     private IEnumerator ReadQRCode()
     {
-        Texture2D texture = new(_webCamTexture.width, _webCamTexture.height, TextureFormat.RGBA32, false);
         _qrCodeResult = "";
+        WebCamTexture webCamTexture = (WebCamTexture)_rawImage.texture;
 
-        _webCamTexture.Play();
+        webCamTexture.Play();
+        yield return new WaitUntil(() => webCamTexture.width > 16 && webCamTexture.height > 16);
+
+        Texture2D texture = new(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
 
         while (string.IsNullOrEmpty(_qrCodeResult))
         {
-            texture.SetPixels32(_webCamTexture.GetPixels32());
+            texture.SetPixels32(webCamTexture.GetPixels32());
             texture.Apply();
 
             WWWForm form = new();
@@ -88,7 +96,7 @@ public class QRCodeReader : MonoBehaviour
             yield return _waitForSeconds;
         }
 
-        _webCamTexture.Stop();
+        webCamTexture.Stop();
         _readingCoroutine = null;
     }
 }

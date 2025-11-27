@@ -63,8 +63,10 @@ public class Reservation : UI.PageNavigation.Page
 
     public void UpdateTime(TimeSpan time)
     {
+        Debug.Log("Updating time");
         if (time == null || _selectedDayOfWeekIndex == -1)
         {
+            Debug.Log("Invalid time or day of week index");
             _selectedTime = TimeSpan.Zero;
             _timeErrorText.gameObject.SetActive(true);
             return;
@@ -74,15 +76,19 @@ public class Reservation : UI.PageNavigation.Page
 
         if (!openingDay.IsOpenAt(time))
         {
+            Debug.Log("Time not within opening hours, adjusting to first available time");
             time = openingDay.firstAvailableTime;
             if (!openingDay.IsOpenAt(time))
             {
+                Debug.Log("Adjusted time still not within opening hours, showing error");
                 _timeErrorText.gameObject.SetActive(true);
                 return;
             }
         }
 
+        Debug.Log("Time is valid, updating selection");
         _selectedTime = time;
+        Debug.Log("Selected time: " + _selectedTime.ToString());
         _timeText.text = DateTime.MinValue.Add(_selectedTime).ToString(_timeFormat).ToLowerInvariant();
 
         _timeErrorText.gameObject.SetActive(false);

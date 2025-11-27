@@ -114,22 +114,22 @@ namespace UI.PageNavigation
             _overlayContainer.SetContent(page);
         }
 
-        public bool Back()
+        public void Back()
         {
             if (_overlayContainer.isOpen)
             {
                 CloseOverlay();
-                return true;
+                return;
             }
 
             if (!_pageHistory.TryPop(out Page previousPage))
             {
                 Debug.Log("PageManager: No pages in history to go back to.");
-                return false;
+                return;
             }
 
             UndoReplacement(previousPage);
-            return true;
+            return;
         }
 
         private void UndoReplacement(Page pageToRestore)

@@ -14,6 +14,13 @@ public class QrCodeReaderPage : Page
 
     private int _assetID;
 
+    private void OnDisable()
+    {
+        _errorText.gameObject.SetActive(false);
+        _goButton.interactable = false;
+        _assetID = -1;
+    }
+
     public void TryOpenVisualizer(string assetID)
     {
         bool shouldOpen = int.TryParse(assetID, out int id) && _visualizer.HasAsset(id);
@@ -33,7 +40,12 @@ public class QrCodeReaderPage : Page
 
     public void GoToVisualizer()
     {
-        _pageManager.OpenPage(_visualizer, PageOpenMode.Replace);
+        if (_assetID == -1)
+        {
+            return;
+        }
+
         _visualizer.ActivateVisualizer(_assetID);
+        _pageManager.OpenPage(_visualizer, PageOpenMode.Replace);
     }
 }

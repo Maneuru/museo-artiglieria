@@ -8,10 +8,25 @@ public class DatePicker : MonoBehaviour
     [SerializeField] private UnityEvent<DateTime> _onDateSelected;
 
     private AndroidDatePicker _datePicker;
+    private DateTime? _pendingDate;
 
     private void Awake()
     {
         _datePicker = new AndroidDatePicker();
+    }
+
+    private void Update()
+    {
+        if (_pendingDate.HasValue)
+        {
+            _onDateSelected?.Invoke(_pendingDate.Value);
+            _pendingDate = null;
+        }
+    }
+
+    private void InvokeUnityEvent(DateTime date)
+    {
+        _pendingDate = date;
     }
 
     public void ShowDatePicker()
@@ -21,7 +36,7 @@ public class DatePicker : MonoBehaviour
 
     public void ShowDatePicker(DateTime initDate)
     {
-        _datePicker.Show(initDate, _onDateSelected);
+        _datePicker.Show(initDate, InvokeUnityEvent);
     }
 }
 
@@ -56,13 +71,13 @@ public class DatePickerEditor : UnityEditor.Editor
 #if UNITY_ANDROID
 public class AndroidDatePicker
 {
-    private UnityEvent<DateTime> _dateSelectedEvent;
+    private Action<DateTime> _dateSelectedCallback;
     private DateTime _initDate;
 
-    public void Show(DateTime initDate, UnityEvent<DateTime> callback)
+    public void Show(DateTime initDate, Action<DateTime> callback)
     {
         _initDate = initDate;
-        _dateSelectedEvent = callback;
+        _dateSelectedCallback = callback;
 
         var unityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         var activity = unityActivity.GetStatic<AndroidJavaObject>("currentActivity");
@@ -78,7 +93,7 @@ public class AndroidDatePicker
 
     private void DateSelectedHandler(DateTime date)
     {
-        _dateSelectedEvent?.Invoke(date);
+        _dateSelectedCallback?.Invoke(date);
     }
 
     class DateCallback : AndroidJavaProxy

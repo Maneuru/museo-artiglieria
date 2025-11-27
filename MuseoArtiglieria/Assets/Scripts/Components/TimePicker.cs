@@ -7,20 +7,36 @@ public class TimePicker : MonoBehaviour
     [SerializeField] private UnityEvent<TimeSpan> _onTimeSelected;
 
     private AndroidTimePicker _timePicker;
+    private TimeSpan? _pendingTime;
 
     private void Awake()
     {
         _timePicker = new AndroidTimePicker();
     }
 
+    private void Update()
+    {
+        if (_pendingTime.HasValue)
+        {
+            Debug.Log("Invoking time selected event with time: " + _pendingTime.Value.ToString());
+            _onTimeSelected?.Invoke(_pendingTime.Value);
+            _pendingTime = null;
+        }
+    }
+
+    private void InvokeUnityEvent(TimeSpan time)
+    {
+        _pendingTime = time;
+    }
+
     public void ShowTimePicker()
     {
-        _timePicker.Show(TimeSpan.Zero, _onTimeSelected);
+        ShowTimePicker(TimeSpan.Zero);
     }
 
     public void ShowTimePicker(TimeSpan initTime)
     {
-        _timePicker.Show(initTime, _onTimeSelected);
+        _timePicker.Show(initTime, InvokeUnityEvent);
     }
 }
 
@@ -55,13 +71,13 @@ public class TimePickerEditor : UnityEditor.Editor
 #if UNITY_ANDROID
 public class AndroidTimePicker
 {
-    private UnityEvent<TimeSpan> _onTimeSelected;
+    private Action<TimeSpan> _onTimeSelectedCallback;
     private TimeSpan _initTime;
 
-    public void Show(TimeSpan initTime, UnityEvent<TimeSpan> callback)
+    public void Show(TimeSpan initTime, Action<TimeSpan> callback)
     {
         _initTime = initTime;
-        _onTimeSelected = callback;
+        _onTimeSelectedCallback = callback;
 
         var unityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         var activity = unityActivity.GetStatic<AndroidJavaObject>("currentActivity");
@@ -81,7 +97,7 @@ public class AndroidTimePicker
 
     private void TimeSelectedHandler(TimeSpan time)
     {
-        _onTimeSelected?.Invoke(time);
+        _onTimeSelectedCallback?.Invoke(time);
     }
 
     class TimeCallback : AndroidJavaProxy
