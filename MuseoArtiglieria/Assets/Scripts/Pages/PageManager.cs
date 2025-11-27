@@ -10,6 +10,7 @@ namespace UI.PageNavigation
         [Header("References")]
         [SerializeField] private Overlay _overlayContainer;
         private ScrollRect _scrollRect;
+        private float _lastBackTime;
 
         private readonly Stack<Page> _pageHistory = new();
         private Page _currentPage;
@@ -64,6 +65,22 @@ namespace UI.PageNavigation
             currentPage = page;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Time.time - _lastBackTime < 0.5f)
+                {
+                    Debug.Log("PageManager: Double back detected, exiting application.");
+                    Application.Quit();
+                    return;
+                }
+
+                _lastBackTime = Time.time;
+                Back();
+            }
+        }
+
         public void OpenPage(Page newPage, PageOpenMode mode)
         {
             switch (mode)
@@ -97,21 +114,22 @@ namespace UI.PageNavigation
             _overlayContainer.SetContent(page);
         }
 
-        public void Back()
+        public bool Back()
         {
             if (_overlayContainer.isOpen)
             {
                 CloseOverlay();
-                return;
+                return true;
             }
 
             if (!_pageHistory.TryPop(out Page previousPage))
             {
                 Debug.Log("PageManager: No pages in history to go back to.");
-                return;
+                return false;
             }
 
             UndoReplacement(previousPage);
+            return true;
         }
 
         private void UndoReplacement(Page pageToRestore)
